@@ -31,7 +31,7 @@
                     <th>#</th>
                     <th>Imagen</th>
                     <th>Código</th>
-                    <th>Descripción</th>
+                    <th>Nombre</th>
                     <th>Categoría</th>
                     <th>Stock</th>
                     <th>Precio de Compra</th>
@@ -70,7 +70,8 @@
                                     <select name="id_categoria" id="id_categoria" class="form-control">
                                         <option value="">Seleccione</option>
                                         @foreach($categorias as $categoria)
-                                            <option class="text-uppercase" {{old('id_categoria')==$categoria->id ? 'selected':''}} value="{{$categoria->id}}">{{$categoria->categoria}}</option>
+                                            <option class="text-uppercase"
+                                                    {{old('id_categoria')==$categoria->id ? 'selected':''}} value="{{$categoria->id}}">{{$categoria->categoria}}</option>
 
                                         @endforeach
 
@@ -88,13 +89,21 @@
                                     {!! $errors->first('codigo','<span class="help-block">*:message</span>')!!}
                                 </div>
                             </div>
+                            <!--ENTRADA PARA NOMBRE -->
+                            <div class="form-group {{$errors->has('nombre_producto')? 'has-error':''}}">
+                                <label for="">Nombre</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span>
+                                    <input id="" type="text" name="nombre_producto" class="form-control"
+                                           placeholder="Ingresar nombre">
+                                    {!! $errors->first('nombre_producto','<span class="help-block">*:message</span>')!!}
+                                </div>
+                            </div>
                             <!--ENTRADA PARA DESCRIPCION -->
                             <div class="form-group {{$errors->has('descripcion')? 'has-error':''}}">
                                 <label for="">Descripción</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span>
-                                    <input id="descripcion" type="text" name="descripcion" class="form-control"
-                                           placeholder="Ingresar descripcion">
+                                    <textarea class="textarea" name="descripcion" placeholder="Información o descripción del producto" style="width: 100%; height: 150px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                                     {!! $errors->first('descripcion','<span class="help-block">*:message</span>')!!}
                                 </div>
                             </div>
@@ -142,7 +151,7 @@
                                         <div class="form-group">
                                             <h4>
                                                 {{--<input type="checkbox" class="minimal porcentaje" checked>--}}
-                                                 Porcentaje
+                                                Porcentaje
                                             </h4>
                                         </div>
                                     </div>
@@ -210,11 +219,13 @@
                             <!--ENTRADA PARA SELECCIONAR CATEGORIA -->
                             <!--ENTRADA PARA SELECCIONAR CATEGORIA -->
                             <div class="form-group {{$errors->has('id_categoria')? 'has-error':''}}">
-                                <label for="">Seleccione Categoría</label>
+                                <label for="">Categoría</label>
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-th"></i></span>
-                                    <select name="id_categoria"  class="form-control" readonly>
-                                        <option id="editarCategoria" value=""></option>
+                                    <select name="id_categoria" class="form-control" readonly>
+                                        @foreach($categorias as $categoria)
+                                        <option id="editarCategoria" value="" {{ old('id_categoria',$categoria->id) == $categoria->id ? 'selected':''}}>{{$categoria->categoria}}</option>
+                                        @endforeach
                                     </select>
                                     {!! $errors->first('id_categoria','<span class="help-block">Seleccione Tipo</span>')!!}
                                 </div>
@@ -229,13 +240,21 @@
                                     {!! $errors->first('codigo','<span class="help-block">*:message</span>')!!}
                                 </div>
                             </div>
+                            <!--ENTRADA PARA NOMBRE -->
+                            <div class="form-group {{$errors->has('nombre_producto')? 'has-error':''}}">
+                                <label for="">Nombre</label>
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span>
+                                    <input id="editarNombre" type="text" name="nombre_producto" class="form-control"
+                                           placeholder="">
+                                    {!! $errors->first('nombre_producto','<span class="help-block">*:message</span>')!!}
+                                </div>
+                            </div>
                             <!--ENTRADA PARA DESCRIPCION -->
                             <div class="form-group {{$errors->has('descripcion')? 'has-error':''}}">
                                 <label for="">Descripción</label>
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-product-hunt"></i></span>
-                                    <input id="editarDescripcion" type="text" name="descripcion" class="form-control"
-                                           placeholder="Ingresar descripcion">
+                                    <textarea class="textarea" id="editarDescripcion" name="descripcion" placeholder="" style="width: 100%; height: 150px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
                                     {!! $errors->first('descripcion','<span class="help-block">*:message</span>')!!}
                                 </div>
                             </div>
@@ -290,7 +309,8 @@
                                     <div class="col-md-6" style="padding: 0px;">
                                         <div class="form-group" style="margin-left: 17px;">
                                             <div class="input-group">
-                                                <input type="number" class="form-control input-lg nuevoPorcentaje " id="editarPorcentaje"
+                                                <input type="number" class="form-control input-lg nuevoPorcentaje "
+                                                       id="editarPorcentaje"
                                                        min="0" value="40">
                                                 <span class="input-group-addon"><i class="fa fa-percent"></i></span>
                                             </div>
@@ -331,6 +351,7 @@
             </div>
         </div>
     </div>
+@stop
 @section('js')
     <script>
         new Dropzone('.dropzone', {
@@ -355,7 +376,10 @@
 
         Dropzone.autoDiscover = false;
 
-
+        $(function () {
+            //bootstrap WYSIHTML5 - text editor
+            $(".textarea").wysihtml5();
+        });
 
     </script>
 @endsection
@@ -380,20 +404,23 @@
             "serverSide": true,
             "data": null,
             "ajax": "/api/productos",
-            "columns":[
+            "columns": [
 
                 {data: 'id'},
-                {render:function (data, type, JsonResultRow, meta) {
-                        return '<img src="' +JsonResultRow.imagen+ '" width="40px" />';
-                    }},
+                {
+                    render: function (data, type, JsonResultRow, meta) {
+                        return '<img src="' + JsonResultRow.imagen + '" width="40px" />';
+                    }
+                },
                 {data: 'codigo'},
-                {data: 'descripcion'},
+                {data: 'nombre'},
                 {data: 'tipo_categoria.categoria'},
                 {data: 'stock'},
                 {data: 'precio_compra'},
                 {data: 'precio_venta'},
                 {data: 'created_at'},
-                {defaultContent:'\n' +
+                {
+                    defaultContent: '\n' +
                     '                            <button class="btn btn-xs btn-info btnEditarProducto" idproducto="" id=""\n' +
                     '                                    ="" data-toggle="modal"\n' +
                     '                                    data-target="#modalEditarProductos"><i class="fa fa-pencil"></i></button>\n' +
@@ -404,31 +431,32 @@
                     '\n' +
                     '                                <a class="btn btn-xs btn-danger eliminarProducto"><i class="fa fa-times"></i></a>\n' +
                     '\n' +
-                    '                            </form>'}
+                    '                            </form>'
+                }
 
 
             ],
-            "language":{
-                "sProcessing":     "Procesando...",
-                "sLengthMenu":     "Mostrar _MENU_ registros",
-                "sZeroRecords":    "No se encontraron resultados",
-                "sEmptyTable":     "Ningún dato disponible en esta tabla",
-                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix":    "",
-                "sSearch":         "Buscar:",
-                "sUrl":            "",
-                "sInfoThousands":  ",",
+            "language": {
+                "sProcessing": "Procesando...",
+                "sLengthMenu": "Mostrar _MENU_ registros",
+                "sZeroRecords": "No se encontraron resultados",
+                "sEmptyTable": "Ningún dato disponible en esta tabla",
+                "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sSearch": "Buscar:",
+                "sUrl": "",
+                "sInfoThousands": ",",
                 "sLoadingRecords": "Cargando...",
                 "oPaginate": {
-                    "sFirst":    "Primero",
-                    "sLast":     "Último",
-                    "sNext":     "Siguiente",
+                    "sFirst": "Primero",
+                    "sLast": "Último",
+                    "sNext": "Siguiente",
                     "sPrevious": "Anterior"
                 },
                 "oAria": {
-                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                    "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
                     "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                 }
             }
@@ -438,14 +466,14 @@
         //ACTIVAR BOTONES CON SU ID CORRESPONDIENTE
 
         //Eliminar producto
-        $('.tablaproductos tbody').on('click','.eliminarProducto',function () {
-            var data = table.row( $(this).parents('tr') ).data();
+        $('.tablaproductos tbody').on('click', '.eliminarProducto', function () {
+            var data = table.row($(this).parents('tr')).data();
             $(this).attr('producto', data.id);
 
             var formularioEliminarProducto = $('.myformProductos');
-            var url = 'http://inventario.mauro/producto-eliminar/'+data.id+'';
+            var url = '/producto-eliminar/' + data.id + '';
 
-            formularioEliminarProducto.attr('action',url);
+            formularioEliminarProducto.attr('action', url);
 
             $.confirm({
                 animationBounce: 1.5,
@@ -459,7 +487,7 @@
                     tryAgain: {
                         text: 'Eliminar',
                         btnClass: 'btn-red',
-                        action: function(){
+                        action: function () {
                             $(".myformProductos").submit();
                         }
                     },
@@ -470,22 +498,22 @@
             });
         });
         //Editar producto
-        $('.tablaproductos tbody').on('click','.btnEditarProducto',function () {
+        $('.tablaproductos tbody').on('click', '.btnEditarProducto', function () {
             var data = table.row($(this).parents('tr')).data();
 
             $('#editarCodigo').val(data.codigo);
-            $('#editarDescripcion').val(data.descripcion);
+            $('#editarNombre').val(data.nombre);
+            $('#editarDescripcion').value(data.descripcion);
             $('#editarStock').val(data.stock);
             $('#editarPrecioCompra').val(data.precio_compra);
             $('#editarPrecioVenta').val(data.precio_venta);
-            $('#editarImagenProducto').attr('src',data.imagen);
+            $('#editarImagenProducto').attr('src', data.imagen);
             $('#editarCategoria').val(data.id_categoria);
-            $('#editarCategoria').html(data.tipo_categoria.categoria);
 
             var formularioActualizarProducto = $('.myformActualizarproductos');
-            var url = 'http://inventario.mauro/producto-actualizado/'+data.id+'';
+            var url = '/producto-actualizado/' + data.id + '';
 
-            formularioActualizarProducto.attr('action',url);
+            formularioActualizarProducto.attr('action', url);
         });
 
     </script>
@@ -514,9 +542,5 @@
         });
 
         Dropzone.autoDiscover = false;
-
-
-
     </script>
 @endsection
-@stop

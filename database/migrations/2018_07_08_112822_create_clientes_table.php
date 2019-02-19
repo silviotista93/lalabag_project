@@ -21,7 +21,8 @@ class CreateClientesTable extends Migration
             $table->string('telefono');
             $table->mediumText('direccion');
             $table->timestamp('fecha_nacimiento')->nullable();
-            $table->integer('compras');
+            $table->dateTime('ultima_compra')->nullable();
+            $table->integer('compras')->nullable();
             $table->timestamps();
         });
     }

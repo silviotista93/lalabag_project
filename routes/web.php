@@ -10,8 +10,14 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/productos/{id}', function($id){
+    $categoria = \App\Producto::where('id_categoria',$id)->get();
+    return $categoria;
+});
 
-
+Route::get('ruta-consultas/{codigo}',function ($codigo){
+    return \App\Venta::where('codigo',$codigo)->with('ventas_cliente','ventas_vendedor')->first();
+});
 
 Route::group(['namespace'=>'Admin','middleware' => 'auth' ],function (){
     Route::get('dashboard','DashboardController@index')->name('dashboard');
@@ -53,8 +59,16 @@ Route::group(['namespace'=>'Admin','middleware' => 'auth' ],function (){
 
     // Crear Ventas...
     Route::get('ventas/crear-ventas','CrearVentasController@crearVentas')->name('crear-ventas');
+    Route::post('venta-creada','CrearVentasController@crearVenta')->name('venta-creada');
 
+    // Editar Ventas...
+    Route::get('ventas/editar-ventas/{id}','CrearVentasController@editar_venta_index')->name('editar-ventas');
+    Route::put('ventas/cambios-realizado/{todasVentas}','CrearVentasController@editarVenta')->name('cambios-ventas');
 
+    //Eliminar Venta
+    Route::delete('venta-eliminar/{id}','AdministrarVentasController@eliminarVenta')->name('eliminar-venta');
+
+    //Reporte Ventas
     Route::get('ventas/reportes-ventas','ReporteVentasController@reporteVentas')->name('reportes-ventas');
 
 
@@ -62,9 +76,15 @@ Route::group(['namespace'=>'Admin','middleware' => 'auth' ],function (){
     Route::get('api/productos',function (){
         return datatables()->of(\App\Producto::with('tipoCategoria')->get())->toJson();
     });
+
+    Route::get('tabla-ventas','AdministrarVentasController@listarTabla')->name('tabla-ventas');
+
     Route::get('api/clientes',function (){
         return datatables()->of(\App\Cliente::all())->toJson();
     });
+
+    //Imprimir Recibo
+    Route::get('ventas/recibo/{codigo}','FacturaController@recibo')->name('recibo');
 });
 
 // Authentication Routes...

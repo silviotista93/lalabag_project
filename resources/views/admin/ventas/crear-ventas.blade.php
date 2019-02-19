@@ -29,8 +29,8 @@
                     </div>
                 </div>
 
-                <form role="form" method="post" class="formularioVenta">
-
+                <form role="form" action="{{route('venta-creada')}}" method="post" class="formularioVenta">
+                    @csrf
                     <div class="box-body">
 
                         <div class="box">
@@ -45,7 +45,7 @@
 
                                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
 
-                                    <input type="text" class="form-control" id="nuevoVendedor" name="nuevoVendedor"
+                                    <input type="text" class="form-control" id="nuevoVendedor"
                                            value="{{auth()->user()->name}} {{auth()->user()->apellidos}}" readonly>
                                     <input type="hidden" name="idVendedor" value="{{auth()->user()->id}}">
 
@@ -62,16 +62,14 @@
                                 <div class="input-group">
 
                                     <span class="input-group-addon"><i class="fa fa-key"></i></span>
-                                    @if(isset($ventas))
+                                    @if(empty($codigoFactura->id))
                                         <input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta"
                                                value="10001" readonly>
                                     @else
-                                        @foreach($ventas as $venta)
+                                        @php($codigo = $codigoFactura->id+1)
+                                        <input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta"
+                                               value="1000{{$codigo}}" readonly>
 
-                                            @php($codigo = $venta->codigo+1)
-                                            <input type="text" class="form-control" id="nuevaVenta" name="nuevaVenta"
-                                                   value="{{$codigo}}" readonly>
-                                        @endforeach
                                     @endif
 
                                 </div>
@@ -116,14 +114,16 @@
                             <div class="form-group row nuevoProducto">
 
 
-
                             </div>
+                            <input type="hidden" id="listaProductos" name="listaProductos">
 
                             <!--=====================================
                             BOTÓN PARA AGREGAR PRODUCTO
                             ======================================-->
 
-                            <button type="button" class="btn btn-default hidden-lg">Agregar producto</button>
+                            <button type="button" class="btn btn-default hidden-lg btnAgregarProducto">Agregar
+                                producto
+                            </button>
 
                             <hr>
 
@@ -133,7 +133,7 @@
                                 ENTRADA IMPUESTOS Y TOTAL
                                 ======================================-->
 
-                                <div class="col-xs-8 pull-right">
+                                <div class="col-xs-10 pull-right">
 
                                     <table class="table">
 
@@ -154,9 +154,13 @@
 
                                                 <div class="input-group">
 
-                                                    <input type="number" class="form-control" min="0"
+                                                    <input type="number" class="form-control input-lg" min="0"
                                                            id="nuevoImpuestoVenta" name="nuevoImpuestoVenta"
                                                            placeholder="0" required>
+                                                    <input type="hidden" name="nuevoPrecioImpuesto"
+                                                           id="nuevoPrecioImpuesto" required>
+                                                    <input type="hidden" name="nuevoPrecioNeto" id="nuevoPrecioNeto"
+                                                           required>
                                                     <span class="input-group-addon"><i class="fa fa-percent"></i></span>
 
                                                 </div>
@@ -170,9 +174,10 @@
                                                     <span class="input-group-addon"><i
                                                                 class="ion ion-social-usd"></i></span>
 
-                                                    <input type="number" min="1" class="form-control"
-                                                           id="nuevoTotalVenta" name="nuevoTotalVenta"
+                                                    <input type="text" min="1" class="form-control input-lg"
+                                                           id="nuevoTotalVenta" total="" name=""
                                                            placeholder="00000" readonly required>
+                                                    <input type="hidden" name="total" id="totalVentaDB">
 
 
                                                 </div>
@@ -204,27 +209,19 @@
                                         <select class="form-control" id="nuevoMetodoPago" name="nuevoMetodoPago"
                                                 required>
                                             <option value="">Seleccione método de pago</option>
-                                            <option value="efectivo">Efectivo</option>
-                                            <option value="tarjetaCredito">Tarjeta Crédito</option>
-                                            <option value="tarjetaDebito">Tarjeta Débito</option>
+                                            <option value="Efectivo">Efectivo</option>
+                                            <option value="TC">Tarjeta Crédito</option>
+                                            <option value="TD">Tarjeta Débito</option>
                                         </select>
 
                                     </div>
 
                                 </div>
-
-                                <div class="col-xs-6" style="padding-left:0px">
-
-                                    <div class="input-group">
-
-                                        <input type="text" class="form-control" id="nuevoCodigoTransaccion"
-                                               name="nuevoCodigoTransaccion" placeholder="Código transacción" required>
-
-                                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-
-                                    </div>
+                                <input type="hidden" id="listaMetodoPago" name="listaMetodoPago">
+                                <div class="cajasMetodoPago">
 
                                 </div>
+
 
                             </div>
 
@@ -271,7 +268,7 @@
                             <th style="width: 10px">#</th>
                             <th>Imagen</th>
                             <th>Código</th>
-                            <th>Descripcion</th>
+                            <th>Nombre</th>
                             <th>Stock</th>
                             <th>Acciones</th>
                         </tr>
@@ -402,6 +399,17 @@
 
 @section('js')
     <script>
+        function obtenerClase(id) {
+            var info = 'btn-primary';
+            var all = document.querySelectorAll('.quitarSeguro');
+            all.forEach(function (e) {
+                if (e.value === id) {
+                    info = 'btn-default';
+                }
+            });
+            return info;
+        }
+
         var table = $('.tabla_producto_venta').DataTable({
             "processing": true,
             "serverSide": true,
@@ -416,7 +424,7 @@
                     }
                 },
                 {data: 'codigo'},
-                {data: 'descripcion'},
+                {data: 'nombre'},
                 {
                     render: function (data, type, JsonResultRow, meta) {
 
@@ -424,9 +432,10 @@
                     }
                 },
                 {
-                    defaultContent: '<div class="btn-group">\n' +
-                    '                      <button type="button"  class="recuperarBoton btn btn-primary agregarProducto " idProducto>Agregar</button> \n' +
-                    '                    </div>'
+                    render: function (data, type, JsonResultRow, meta) {
+
+                        return '<button id="btnAgregarVentaProducto' + JsonResultRow.id + '" class="btn btn-dark ' + obtenerClase(JsonResultRow.id) + ' recuperarBoton agregarVentaProducto" idProducto>Agregar</button>'
+                    }
                 }
 
 

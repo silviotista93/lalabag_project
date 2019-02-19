@@ -32,4 +32,20 @@ class User extends Authenticatable
 
         $this->attributes['password'] = bcrypt($password);
     }
+
+    public function setNameAttribute($valor){
+        $this->attributes['name'] = strtolower($valor);
+    }
+
+    public function getNameAttribute($valor){
+        return ucwords($valor);
+    }
+
+    public function setApellidosAttribute($valor){
+        $this->attributes['apellidos'] = strtolower($valor);
+    }
+
+    public function getApellidosAttribute($valor){
+        return ucwords($valor);
+    }
 }

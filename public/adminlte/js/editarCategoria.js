@@ -3,7 +3,7 @@ $(document).on('click','.btnEditarCategoria',function () {
     var id = $(this).attr('id');
     $('#categoria').val($(this).attr('categoria'));
     console.log(id,'id');
-    var url ='http://inventario.mauro/categoria-update/'+id;
+    var url ='/categoria-update/'+id;
 
 
     $('#form_actualizar_categoria').attr('action',url);

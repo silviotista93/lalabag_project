@@ -6,6 +6,7 @@ use App\Categoria;
 use App\Producto;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class ProductosController extends Controller
@@ -24,6 +25,7 @@ class ProductosController extends Controller
 
             'id_categoria' => 'required',
             'codigo' => 'required',
+            'nombre_producto' => 'required',
             'descripcion' => 'required',
             'stock' => 'required',
             'precioCompra' => 'required',
@@ -37,6 +39,7 @@ class ProductosController extends Controller
 
         $producto->id_categoria = $request->get('id_categoria');
         $producto->codigo = $request->get('codigo');
+        $producto->nombre = $request->get('nombre_producto');
         $producto->descripcion = $request->get('descripcion');
         $producto->stock = $request->get('stock');
         $producto->precio_compra = $request->get('precioCompra');
@@ -57,6 +60,7 @@ class ProductosController extends Controller
 
             'id_categoria' => 'required',
             'codigo' => 'required',
+            'nombre_producto' => 'required',
             'descripcion' => 'required',
             'stock' => 'required',
             'precioCompra' => 'required',
@@ -73,6 +77,7 @@ class ProductosController extends Controller
 
         $producto->id_categoria = $request->get('id_categoria');
         $producto->codigo = $request->get('codigo');
+        $producto->nombre = $request->get('nombre_producto');
         $producto->descripcion = $request->get('descripcion');
         $producto->stock = $request->get('stock');
         $producto->precio_compra = $request->get('precioCompra');
@@ -112,4 +117,10 @@ class ProductosController extends Controller
 
         return $producto = Producto::where('id',$id)->with('tipoCategoria')->get();
     }
+    public function productoEspecificoDescripcion($id){
+
+        return $producto = Producto::where('id',$id)->with('tipoCategoria')->get();
+    }
+
+
 }

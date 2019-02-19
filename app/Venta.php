@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Venta extends Model
 {
+        protected $fillable = [
+        'codigo','id_cliente','id_vendedor','productos','impuesto','neto','total','metodo_pago'
+        ];
         public function ventas_cliente(){
 
             return $this->belongsTo(Cliente::class, 'id_cliente');

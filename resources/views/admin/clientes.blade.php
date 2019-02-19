@@ -375,7 +375,7 @@
                     {data: 'email'},
                     {data: 'telefono'},
                     {data: 'compras'},
-                    {defaultContent:'0'},
+                    {data:'ultima_compra'},
                     {data: 'created_at'},
                     {defaultContent:'<button href="#" class="btn btn-xs btn-default btnVerCliente" data-target="#modalVerCliente" data-toggle="modal"><i class="fa fa-eye"></i></button>\n' +
                         '                            <button class="btn btn-xs btn-info btnEditarCliente" idproducto="" id=""\n' +

@@ -15,6 +15,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="/adminlte/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/adminlte/plugins/datepicker/datepicker3.css">
+    <link rel="stylesheet" href="/adminlte/select2-4.0.3/dist/css/select2.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
+
     <!-- Tablas -->
     <link rel="stylesheet" href="/adminlte/plugins/datatables/dataTables.bootstrap.css">
     <link rel="stylesheet" href="/adminlte/plugins/datatables/responsive.bootstrap.min.css">
@@ -25,6 +28,10 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="/adminlte/plugins/iCheck/all.css">
+    <link rel="stylesheet" href="/adminlte/bootstrap/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
+    <!-- Morris chart -->
+    <link rel="stylesheet" href="/adminlte/plugins/morris/morris.css">
 
     <!-- Theme style -->
     <link rel="stylesheet" href="/adminlte/css/AdminLTE.min.css">
@@ -35,12 +42,14 @@ scratch. This page gets rid of all links and provides the needed markup only.
           apply the skin class to the body tag so the changes take effect.
     -->
     <link rel="stylesheet" href="/adminlte/css/skins/skin-blue.min.css">
+    <link rel="stylesheet" href="/adminlte//css/skins/_all-skins.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+
     <![endif]-->
 </head>
 <!--
@@ -64,7 +73,7 @@ desired effect
                 |sidebar-collapse MINIMIZAR MENU
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-collapse sidebar-mini">
 
 <div class="wrapper">
 
@@ -522,16 +531,21 @@ desired effect
 <script src="/adminlte/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="/adminlte/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <script src="/adminlte/plugins/datatables/extensions/Responsive/js/dataTables.responsive.min.js"></script>
-
+<!-- Morris.js charts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="/adminlte/plugins/morris/morris.min.js"></script>
 
 <!-- Bootstrap 3.3.6 -->
 <script src="/adminlte/bootstrap/js/bootstrap.min.js"></script>
 <!-- AdminLTE App -->
 <script src="/adminlte/js/app.min.js"></script>
 <script src="/adminlte/js/toogle_button.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+<script src="/adminlte/js/jqueryNumber.js"></script>
 
 <!-- DataTables -->
 <script src="/adminlte/plugins/datatables/jquery.dataTables.min.js"></script>
+
 <script src="/adminlte/plugins/datepicker/bootstrap-datepicker.js"></script>
 <script src="/adminlte/plugins/datatables/dataTables.bootstrap.min.js"></script>
 <script src="/adminlte/plugins/datatables/dataTables.responsive.min.js"></script>
@@ -546,16 +560,26 @@ desired effect
 <script type="text/javascript" src="/adminlte/js/codigo_productos.js"></script>
 <script type="text/javascript" src="/adminlte/js/calculo_precio_venta.js"></script>
 <script type="text/javascript" src="/adminlte/js/ventas.js"></script>
+<script type="text/javascript" src="/adminlte/js/reportes.js"></script>
+<script type="text/javascript" src="/adminlte/select2-4.0.3/dist/js/select2.js"></script>
 <script src="/adminlte/plugins/datepicker/bootstrap-datepicker.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.4.0/min/dropzone.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+<script src="/adminlte/bootstrap/daterangepicker/moment.min.js"></script>
+<script src="/adminlte/bootstrap/daterangepicker/daterangepicker.js"></script>
 
-
+<script src="/adminlte/plugins/chartjs/Chart.min.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="/adminlte/js/pages/dashboard2.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/adminlte/js/demo.js"></script>
 
 
 <script src="/adminlte/plugins/input-mask/jquery.inputmask.js"></script>
 <script src="/adminlte/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
 <script src="/adminlte/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<script src="/adminlte/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 
 @section('js')
 <script>
@@ -610,6 +634,13 @@ desired effect
 
 @show
 @section('editarImagenProducto')
+
+@show
+
+@section('dataTablesVentas')
+
+@show
+@section('graficas')
 
 @show
 </body>

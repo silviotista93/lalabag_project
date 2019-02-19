@@ -7,7 +7,7 @@ $(document).on('click','.btnEditarUsuario',function(){
     $('#email').val($(this).attr('email'));
     $('#telefono').val($(this).attr('telefono'));
 
-    var url ='http://inventario.mauro/usuario-update/'+id;
+    var url ='/usuario-update/'+id;
 
     console.log(url,'url');
 

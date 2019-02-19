@@ -18,7 +18,7 @@ class CreateVentasTable extends Migration
             $table->string('codigo');
             $table->unsignedInteger('id_cliente');
             $table->unsignedInteger('id_vendedor');
-            $table->string('productos');
+            $table->longText('productos');
             $table->double('impuesto');
             $table->double('neto');
             $table->double('total');
