@@ -113,11 +113,7 @@
         var vendedores = new Morris.Bar({
             element: 'bar-chart-vendedores',
             resize: true,
-            data: [
-                {y: 'Juan', a: 1000},
-                {y: 'Omar', a: 2000},
-                {y: 'Cristian', a: 500,},
-            ],
+            data: {!! json_encode($vendedores) !!},
             barColors: ['#00a65a', '#f56954'],
             xkey: 'y',
             ykeys: ['a'],
@@ -129,11 +125,7 @@
         var compradores = new Morris.Bar({
             element: 'bar-chart-compradores',
             resize: true,
-            data: [
-                {y: 'Didier', a: 1000},
-                {y: 'Jairo', a: 2000},
-                {y: 'Laura', a: 500,},
-            ],
+            data: {!! json_encode($compradores) !!},
             barColors: ['#E1493F'],
             xkey: 'y',
             ykeys: ['a'],
