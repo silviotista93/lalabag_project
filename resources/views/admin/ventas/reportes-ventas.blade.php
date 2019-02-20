@@ -1,5 +1,8 @@
 @extends('admin.layout')
 
+@push("css")
+<link rel="stylesheet" href="/css/reportes/index.css">
+@endpush
 @section('header')
     <h1>
         Reportes de Ventas
@@ -30,8 +33,9 @@
                                 <h3 class="box-title">Gráfico de Ventas</h3>
                             </i>
                         </div>
-                        <div class="box-body border-radius-none nuevoGraficoVentas">
-                            <div class="chart" id="line-chart-ventas" style="height: 250px;"></div>
+                        <div class="box-body border-radius-none nuevoGraficoVentas" id="registroVentas">
+                            <div class="chart grafica" id="line-chart-ventas" style="height: 250px;"></div>
+                            <p class="txtNoRegistro">No hay registros...</p>
                         </div>
                     </div>
                 </div>
@@ -45,7 +49,7 @@
                     <h3 class="box-title">Productos más vendidos</h3>
                 </div>
                 <!-- /.box-header -->
-                <div class="box-body">
+                <div class="box-body" class="grafica">
                     <div class="row">
                         <div class="col-md-8">
                             <div class="chart-responsive">
@@ -69,7 +73,7 @@
                     <!-- /.row -->
                 </div>
                 <!-- /.box-body -->
-                <div class="box-footer no-padding">
+                <div class="box-footer no-padding grafica--data">
                     <ul class="nav nav-pills nav-stacked">
                         <li><a href="#">United States of America
                                 <span class="pull-right text-red"><i class="fa fa-angle-down"></i> 12%</span></a></li>
@@ -81,6 +85,7 @@
                     </ul>
                 </div>
                 <!-- /.footer -->
+                <p class="txtNoRegistro">No hay registros...</p>
             </div>
         </div>
         <div class="col-xs-6">
@@ -88,8 +93,9 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Vendedores</h3>
                 </div>
-                <div class="box-body chart-responsive">
-                    <div class="chart" id="bar-chart-vendedores" style="height: 300px;"></div>
+                <div class="box-body chart-responsive {{ isset($vendedores[0])?"":"sinDatos" }}" id="graficaVendedores">
+                    <div class="chart grafica" id="bar-chart-vendedores" style="height: 300px;"></div>
+                    <p class="txtNoRegistro">No hay registros...</p>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -99,8 +105,9 @@
                 <div class="box-header with-border">
                     <h3 class="box-title">Compradores</h3>
                 </div>
-                <div class="box-body chart-responsive">
-                    <div class="chart" id="bar-chart-compradores" style="height: 300px;"></div>
+                <div class="box-body chart-responsive {{ isset($compradores[0])?"":"sinDatos" }}" id="graficaCompradores">
+                    <div class="chart grafica" id="bar-chart-compradores" style="height: 300px;"></div>
+                    <p class="txtNoRegistro">No hay registros...</p>
                 </div>
                 <!-- /.box-body -->
             </div>
@@ -108,6 +115,68 @@
     </div>
 @stop
 @section('graficas')
+    <script>
+    const lang = "es";
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': "{{csrf_token()}}"
+        }
+    });
+    </script>
+    <script src="/js/storage.js"></script>
+    <script src="/js/daterangepicker.js"></script>
+    <script>
+
+    var lineChar =new Morris.Line({
+            element: 'line-chart-ventas',
+            resize: true,
+            data: [],
+            xkey: 'y',
+            ykeys: ['ventas'],
+            labels: ['ventas'],
+            lineColors: ['#efefef'],
+            lineWidth: 2,
+            hideHover: 'auto',
+            gridTextColor: '#fff',
+            gridStrokeWidth: 0.4,
+            pointSize: 4,
+            pointStrokeColors: ['#efefef'],
+            gridLineColor: '#efefef',
+            gridTextFamily: 'Open Sans',
+            preUnits: '$',
+            gridTextSize: 10
+        });
+    function init(){
+        let nameDate = "daterange-btn2";
+        let dataVentas = new Object();
+
+        function getDatos(){
+            const url = "{{ route("grafica-ventas") }}";
+            const success = function (data){
+                if (data && data.length > 0){
+                    lineChar.setData(data);
+                    registroVentas.classList.remove("sinDatos");
+                }else{
+                    registroVentas.classList.add("sinDatos");
+                }
+            }
+            $.post(
+                url,
+                dataVentas,
+                success,
+                "json"
+            );
+        }
+        getDatos();
+
+        let date = initDateRange(nameDate, function (fechaInicio, fechaFin, label){
+            dataVentas.fechaInicio = fechaInicio.format("YYYY/MM/DD");
+            dataVentas.fechaFin = fechaFin.format("YYYY/MM/DD");
+            getDatos();
+        });
+    }
+    init();
+    </script>
     <script>
 
         var vendedores = new Morris.Bar({
@@ -132,31 +201,6 @@
             labels: ['Ventas'],
             preUnits: '$',
             hideHover: 'auto'
-        });
-
-        new Morris.Line({
-            element: 'line-chart-ventas',
-            resize: true,
-            data: [
-                {y: '2015', ventas: 2666},
-                {y: '2016', ventas: 2778},
-                {y: '2017', ventas: 4912},
-                {y: '2018', ventas: 3767}
-            ],
-            xkey: 'y',
-            ykeys: ['ventas'],
-            labels: ['ventas'],
-            lineColors: ['#efefef'],
-            lineWidth: 2,
-            hideHover: 'auto',
-            gridTextColor: '#fff',
-            gridStrokeWidth: 0.4,
-            pointSize: 4,
-            pointStrokeColors: ['#efefef'],
-            gridLineColor: '#efefef',
-            gridTextFamily: 'Open Sans',
-            preUnits: '$',
-            gridTextSize: 10
         });
 
         //-------------

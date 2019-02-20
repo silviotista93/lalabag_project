@@ -70,7 +70,7 @@ Route::group(['namespace'=>'Admin','middleware' => 'auth' ],function (){
 
     //Reporte Ventas
     Route::get('ventas/reportes-ventas','ReporteVentasController@reporteVentas')->name('reportes-ventas');
-
+    Route::post("ventas/grafica-ventas", 'ReporteVentasController@showVentas')->name("grafica-ventas");
 
     // Renderizar tablas...
     Route::get('api/productos',function (){

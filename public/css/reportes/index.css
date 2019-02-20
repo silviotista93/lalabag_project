@@ -1,0 +1,17 @@
+.txtNoRegistro{
+    font-weight: bold;
+    text-align: center;
+    display: none;
+    font-size: 1.8rem;
+    color: #444;
+    padding: .5rem;
+}
+
+.sinDatos .txtNoRegistro{
+    display: block;
+}
+
+.sinDatos .grafica,
+.sinDatos .grafica--data{
+    display: none;
+}
