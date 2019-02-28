@@ -80,7 +80,7 @@ Route::group(['namespace'=>'Admin','middleware' => 'login' ],function (){
     Route::get('tabla-ventas','AdministrarVentasController@listarTabla')->name('tabla-ventas');
 
     Route::get('api/clientes',function (){
-        return datatables()->of(\App\Cliente::all())->toJson();
+        return datatables()->of(\App\User::with('clientes')->get())->toJson();
     });
 
     //Imprimir Recibo

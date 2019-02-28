@@ -18,5 +18,8 @@ class Cliente extends Model
         return ucwords($valor);
     }
 
+    public function users(){
+        return $this->belongsTo(User::class,'id');
+    }
 
 }

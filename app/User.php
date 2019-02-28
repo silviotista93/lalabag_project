@@ -43,4 +43,8 @@ class User extends Authenticatable
     public function getApellidosAttribute($valor){
         return ucwords($valor);
     }
+
+    public function clientes(){
+        return $this->hasOne(Cliente::class,'user_id');
+    }
 }

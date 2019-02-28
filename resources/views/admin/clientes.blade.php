@@ -32,6 +32,7 @@
                     <th>Id Documento</th>
                     <th>Email</th>
                     <th>Teléfono</th>
+                    <th>Direccion</th>
                     <th>Total Compras</th>
                     <th>Última Compra</th>
                     <th>Ingreso al Sistema</th>
@@ -370,10 +371,11 @@
                 "columns":[
 
                     {data: 'id'},
-                    {data: 'nombre'},
+                    {data: 'name'},
                     {data: 'documento'},
                     {data: 'email'},
                     {data: 'telefono'},
+                    {data: 'direccion'},
                     {data: 'compras'},
                     {data:'ultima_compra'},
                     {data: 'created_at'},
