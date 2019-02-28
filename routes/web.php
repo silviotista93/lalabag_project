@@ -87,6 +87,16 @@ Route::group(['namespace'=>'Admin','middleware' => 'auth' ],function (){
     Route::get('ventas/recibo/{codigo}','FacturaController@recibo')->name('recibo');
 });
 
+Route::group(['namespace'=>'Frontend' ],function (){
+    Route::get('/','HomeControler@index')->name('home');
+
+    Route::get('/login-registro','LoginRegisController@index')->name('login.registro');
+
+    Route::get('/profile','ProfileController@index')->name('profile')->middleware('auth');
+});
+
+
+
 // Authentication Routes...
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
@@ -94,7 +104,7 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
 // Registration Routes...
 //Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-//Route::post('register', 'Auth\RegisterController@register');
+Route::post('register', 'Auth\RegisterController@register')->name('register');
 
 // Password Reset Routes...
 Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');

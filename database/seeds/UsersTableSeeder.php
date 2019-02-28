@@ -19,14 +19,15 @@ class UsersTableSeeder extends Seeder
         $adminRole = Role::create(['name' => 'Administrador']);
         $bodegaRole = Role::create(['name' => 'Bodega']);
         $vendedorRole = Role::create(['name' => 'Vendedor']);
+        $clienteRole = Role::create(['name' => 'Cliente']);
 
         $admin = new User;
         $admin->name = 'Silvio Mauricio';
-        $admin->apellidos = 'Gutierrez Quiñones';
+        $admin->apellidos = 'Gutierrez';
         $admin->email = 'silviotista93@gmail.com';
         $admin->telefono = '318564382';
-        $admin->foto = '';
-        $admin->password = 'cantare.de.2310';
+        $admin->foto = '/adminlte/img/users/perfil.jpg';
+        $admin->password = bcrypt('cantare.de.2310');
 
         $admin->save();
         $admin->assignRole($adminRole);
@@ -36,8 +37,8 @@ class UsersTableSeeder extends Seeder
         $bodega->apellidos = 'Gutierrez';
         $bodega->email = 'smgutierrez@gmail.com';
         $bodega->telefono = '318564382';
-        $bodega->foto = '';
-        $bodega->password = '123';
+        $bodega->foto = '/adminlte/img/users/perfil.jpg';
+        $bodega->password = bcrypt('123');
 
         $bodega->save();
         $bodega->assignRole($bodegaRole);
@@ -47,8 +48,8 @@ class UsersTableSeeder extends Seeder
         $vendedor->apellidos = 'Zalazar';
         $vendedor->email = 'cristian@gmail.com';
         $vendedor->telefono = '318564382';
-        $vendedor->foto = '';
-        $vendedor->password = '123';
+        $vendedor->foto = '/adminlte/img/users/perfil.jpg';
+        $vendedor->password = bcrypt('123');
 
         $vendedor->save();
         $vendedor->assignRole($vendedorRole);

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Cliente;
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -28,7 +30,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/dashboard';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -66,7 +68,26 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'password' => bcrypt($data['password']),
         ]);
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        /*$id = User::select('id')->orderby('created_at','DESC')->first();*/
+        Cliente::create([
+            'user_id' => $user->id
+        ]);
+        $user->assignRole(['4']);
+
+    }
+
+    public function redirectPath()
+    {
+        if(auth()->user()->hasRole('Cliente')){
+            return '/profile';
+        }else{
+            return '/dashboard';
+        }
     }
 }

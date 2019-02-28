@@ -39,10 +39,28 @@ class LoginController extends Controller
     }
     public function logout(Request $request)
     {
-        $this->guard()->logout();
+        if (auth()->user()->hasRole('Cliente')){
+            $this->guard()->logout();
 
-        $request->session()->invalidate();
+            $request->session()->invalidate();
 
-        return redirect('/login');
+            return redirect('/');
+        }else{
+            $this->guard()->logout();
+
+            $request->session()->invalidate();
+
+            return redirect('/login');
+        }
+
+    }
+
+    public function redirectPath()
+    {
+        if(auth()->user()->hasRole('Cliente')){
+            return '/profile';
+        }else{
+            return '/dashboard';
+        }
     }
 }

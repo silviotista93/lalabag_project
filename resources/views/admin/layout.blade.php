@@ -43,6 +43,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     -->
     <link rel="stylesheet" href="/adminlte/css/skins/skin-blue.min.css">
     <link rel="stylesheet" href="/adminlte//css/skins/_all-skins.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Great+Vibes" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -84,9 +85,9 @@ desired effect
         <!-- Logo -->
         <a href="/" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>IN</b>T</span>
+            <span class="logo-mini"><b>LL</b>B</span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>Invent</b>ario</span>
+            <span class="logo-lg" style="font-family:'Great Vibes', cursive;font-size: 30px !important;">Lala Bag</span>
         </a>
 
         <!-- Header Navbar -->
