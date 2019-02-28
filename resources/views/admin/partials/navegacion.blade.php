@@ -14,7 +14,9 @@
         </a>
         <ul class="treeview-menu">
             <li {{request()->is('ventas/administrar-ventas') ? 'class=active' : '' }}><a href="{{route('adminis-ventas')}}"><i class="fa fa-circle-o"></i>Administrar Ventas</a></li>
+{{--
             <li {{request()->is('ventas/crear-ventas') ? 'class=active' : '' }}><a href="{{route('crear-ventas')}}"><i class="fa fa-circle-o"></i>Crear Venta</a></li>
+--}}
             <li {{request()->is('ventas/reportes-ventas') ? 'class=active' : '' }}><a href="{{route('reportes-ventas')}}"><i class="fa fa-circle-o"></i>Reporte de Ventas</a></li>
         </ul>
     </li>

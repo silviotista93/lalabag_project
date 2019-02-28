@@ -21,8 +21,8 @@ class CreateProductosTable extends Migration
             $table->longText('descripcion')->nullable();
             $table->mediumText('imagen');
             $table->integer('stock');
-            $table->double('precio_compra');
-            $table->double('precio_venta');
+            $table->double('precio_compra')->nullable();
+            $table->double('precio_venta')->nullable();
             $table->string('ventas')->nullable();
             $table->timestamps();
         });

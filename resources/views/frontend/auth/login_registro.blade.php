@@ -85,12 +85,6 @@
                             </form>
                         </div>
                     </div>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                    <div class="form__group">
-                        <input type="submit" value="Cerrar" class="btn btn-submit btn-style-1">
-                    </div>
-                    </form>
                 </div>
             </div>
         </div>

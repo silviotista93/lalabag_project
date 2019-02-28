@@ -27,7 +27,7 @@
                                 <div class="banner-info--inner pl--50 pt--150">
                                     <p class="banner-paragraph-1 color--white"></p>
                                     <p class="banner-title-2 color--white font-weight-light mb--0"></p>
-                                    <a href="shop.html" class="btn btn-no-bg btn-color-white" style="top: 120px">Conoce más <i class="fa fa-angle-double-right"></i></a>
+                                    <a href="shop.html" class="btn btn-no-bg btn-color-white" style="top: 120px; color: #0b0b0b">Conoce más <i class="fa fa-angle-double-right"></i></a>
                                 </div>
                             </div>
                             <a href="shop.html" class="banner-link"></a>
@@ -44,7 +44,7 @@
                                 <div class="banner-info--inner pl--50 pt--150">
                                     <p class="banner-paragraph-1 color--white"></p>
                                     <p class="banner-title-2 color--white font-weight-light mb--0"></p>
-                                    <a href="shop.html" class="btn btn-no-bg btn-color-white" style="top: 130px">Conoce más <i class="fa fa-angle-double-right"></i></a>
+                                    <a href="shop.html" class="btn btn-no-bg btn-color-white" style="top: 130px;color: #0b0b0b">Conoce más <i class="fa fa-angle-double-right"></i></a>
                                 </div>
                             </div>
                             <a href="shop.html" class="banner-link"></a>
@@ -61,7 +61,7 @@
                                 <div class="banner-info--inner pl--50 pt--150">
                                     <p class="banner-paragraph-1 color--white"></p>
                                     <p class="banner-title-2 color--white font-weight-light mb--0"></p>
-                                    <a href="shop.html" class="btn btn-no-bg btn-color-white" style="top: 130px">Conoce más <i class="fa fa-angle-double-right"></i></a>
+                                    <a href="shop.html" class="btn btn-no-bg btn-color-white" style="top: 130px; color: #0b0b0b">Conoce más <i class="fa fa-angle-double-right"></i></a>
                                 </div>
                             </div>
                             <a href="shop.html" class="banner-link"></a>
@@ -78,7 +78,7 @@
                                 <div class="banner-info--inner pl--50 pt--150">
                                     <p class="banner-paragraph-1 color--white"></p>
                                     <p class="banner-title-2 color--white font-weight-light mb--0"></p>
-                                    <a href="shop.html" class="btn btn-no-bg btn-color-white" style="top: 130px">Conoce más <i class="fa fa-angle-double-right"></i></a>
+                                    <a href="shop.html" class="btn btn-no-bg btn-color-white" style="top: 130px; color: #0b0b0b">Conoce más <i class="fa fa-angle-double-right"></i></a>
                                 </div>
                             </div>
                             <a href="shop.html" class="banner-link"></a>
@@ -115,108 +115,27 @@
                                                 "slidesToShow": 1
                                             }}
                                         ]'>
+                                    @forelse($productos as $producto)
                                     <div class="item">
                                         <div class="zakas-product">
                                             <div class="product-inner">
                                                 <figure class="product-image">
                                                     <a href="product-details.html">
-                                                        <img src="/frontend/img/products/prod-9.jpg" alt="Products">
+                                                        <img src="{{ $producto->imagen }}" alt="Products">
                                                     </a>
                                                     <span class="product-badge">New</span>
                                                 </figure>
                                                 <div class="product-info">
                                                     <h3 class="product-title mb--15">
-                                                        <a href="product-details.html">Long Cartigen</a>
+                                                        <a href="product-details.html">{{ $producto->nombre }}</a>
                                                     </h3>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="item">
-                                        <div class="zakas-product">
-                                            <div class="product-inner">
-                                                <figure class="product-image">
-                                                    <a href="product-details.html">
-                                                        <img src="/frontend/img/products/prod-9.jpg" alt="Products">
-                                                    </a>
-                                                    <span class="product-badge">New</span>
-                                                </figure>
-                                                <div class="product-info">
-                                                    <h3 class="product-title mb--15">
-                                                        <a href="product-details.html">Long Cartigen</a>
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="zakas-product">
-                                            <div class="product-inner">
-                                                <figure class="product-image">
-                                                    <a href="product-details.html">
-                                                        <img src="/frontend/img/products/prod-9.jpg" alt="Products">
-                                                    </a>
-                                                    <span class="product-badge">New</span>
-                                                </figure>
-                                                <div class="product-info">
-                                                    <h3 class="product-title mb--15">
-                                                        <a href="product-details.html">Long Cartigen</a>
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="zakas-product">
-                                            <div class="product-inner">
-                                                <figure class="product-image">
-                                                    <a href="product-details.html">
-                                                        <img src="/frontend/img/products/prod-9.jpg" alt="Products">
-                                                    </a>
-                                                    <span class="product-badge">New</span>
-                                                </figure>
-                                                <div class="product-info">
-                                                    <h3 class="product-title mb--15">
-                                                        <a href="product-details.html">Long Cartigen</a>
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="zakas-product">
-                                            <div class="product-inner">
-                                                <figure class="product-image">
-                                                    <a href="product-details.html">
-                                                        <img src="/frontend/img/products/prod-9.jpg" alt="Products">
-                                                    </a>
-                                                    <span class="product-badge">New</span>
-                                                </figure>
-                                                <div class="product-info">
-                                                    <h3 class="product-title mb--15">
-                                                        <a href="product-details.html">Long Cartigen</a>
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="zakas-product">
-                                            <div class="product-inner">
-                                                <figure class="product-image">
-                                                    <a href="product-details.html">
-                                                        <img src="/frontend/img/products/prod-9.jpg" alt="Products">
-                                                    </a>
-                                                    <span class="product-badge">New</span>
-                                                </figure>
-                                                <div class="product-info">
-                                                    <h3 class="product-title mb--15">
-                                                        <a href="product-details.html">Long Cartigen</a>
-                                                    </h3>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        @empty
+                                        <h1>No hay productos</h1>
+                                    @endforelse
                                 </div>
                             </div>
                         </div>
@@ -232,7 +151,7 @@
                 <div class="col-xl-5 col-lg-6 text-center">
                     <p class="color--primary font-weight-bold mb--10">¡Que esperas!</p>
                     <h2 class="heading__secondary font-weight-bold mb--35">Registrate y conoce más información</h2>
-                    <a href="shop.html" class="btn">Registrate<i class="fa fa-angle-double-right"></i></a>
+                    <a href="{{ route('login.registro') }}" class="btn">Registrate<i class="fa fa-angle-double-right"></i></a>
                 </div>
             </div>
         </div>

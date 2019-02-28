@@ -28,8 +28,8 @@ class ProductosController extends Controller
             'nombre_producto' => 'required',
             'descripcion' => 'required',
             'stock' => 'required',
-            'precioCompra' => 'required',
-            'precioVenta' => 'required',
+            /*'precioCompra' => 'required',
+            'precioVenta' => 'required',*/
             'imagen' => 'required',
             'ventas' => 'required'
 
@@ -63,8 +63,8 @@ class ProductosController extends Controller
             'nombre_producto' => 'required',
             'descripcion' => 'required',
             'stock' => 'required',
-            'precioCompra' => 'required',
-            'precioVenta' => 'required',
+            /*'precioCompra' => 'required',
+            'precioVenta' => 'required',*/
             'ventas' => 'required'
 
         ]);

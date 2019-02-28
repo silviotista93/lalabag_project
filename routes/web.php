@@ -19,7 +19,7 @@ Route::get('ruta-consultas/{codigo}',function ($codigo){
     return \App\Venta::where('codigo',$codigo)->with('ventas_cliente','ventas_vendedor')->first();
 });
 
-Route::group(['namespace'=>'Admin','middleware' => 'auth' ],function (){
+Route::group(['namespace'=>'Admin','middleware' => 'login' ],function (){
     Route::get('dashboard','DashboardController@index')->name('dashboard');
 
     // Rutas Usuario...
@@ -92,7 +92,7 @@ Route::group(['namespace'=>'Frontend' ],function (){
 
     Route::get('/login-registro','LoginRegisController@index')->name('login.registro');
 
-    Route::get('/profile','ProfileController@index')->name('profile')->middleware('auth');
+    Route::get('/perfil','ProfileController@index')->name('profile')->middleware('cliente');
 });
 
 

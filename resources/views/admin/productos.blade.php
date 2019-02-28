@@ -34,8 +34,8 @@
                     <th>Nombre</th>
                     <th>Categoría</th>
                     <th>Stock</th>
-                    <th>Precio de Compra</th>
-                    <th>Precio de Venta</th>
+                    {{--<th>Precio de Compra</th>
+                    <th>Precio de Venta</th>--}}
                     <th>Agregado</th>
                     <th>Acciones</th>
                 </tr>
@@ -102,10 +102,8 @@
                             <!--ENTRADA PARA DESCRIPCION -->
                             <div class="form-group {{$errors->has('descripcion')? 'has-error':''}}">
                                 <label for="">Descripción</label>
-                                <div class="input-group">
-                                    <textarea class="textarea" name="descripcion" placeholder="Información o descripción del producto" style="width: 100%; height: 150px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                    <textarea class="form-control" name="descripcion" rows="5" placeholder="Información o descripción del producto"></textarea>
                                     {!! $errors->first('descripcion','<span class="help-block">*:message</span>')!!}
-                                </div>
                             </div>
 
                             <!--ENTRADA PARA STOCK -->
@@ -120,7 +118,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6">
+                                {{--<div class="col-md-6">
                                     <!--ENTRADA PARA PRECIO COMPRA -->
                                     <div class="form-group {{$errors->has('precioCompra')? 'has-error':''}}">
                                         <label for="">Precio Compra</label>
@@ -132,8 +130,8 @@
                                             {!! $errors->first('precioCompra','<span class="help-block">*:message</span>')!!}
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
+                                </div>--}}
+                                {{--<div class="col-md-6">
                                     <!--ENTRADA PARA PRECIO VENTA -->
                                     <div class="form-group {{$errors->has('precioVenta')? 'has-error':''}}">
                                         <label for="">Precio Venta</label>
@@ -150,7 +148,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <h4>
-                                                {{--<input type="checkbox" class="minimal porcentaje" checked>--}}
+                                                --}}{{--<input type="checkbox" class="minimal porcentaje" checked>--}}{{--
                                                 Porcentaje
                                             </h4>
                                         </div>
@@ -165,7 +163,7 @@
                                         </div>
                                     </div>
 
-                                </div>
+                                </div>--}}
                             </div>
                             <input type="hidden" name="imagen" value="" id="inputImagen">
                             <input type="hidden" name="ventas" value="0">
@@ -212,7 +210,7 @@
                     <h4 class="modal-title" id="myModalLabel" style="color: #FFFFFF">Editar Producto <i
                                 class="fa fa-plus"></i></h4>
                 </div>
-                <form method="post" action="" class="myformActualizarproductos">
+                <form method="post"  class="myformActualizarproductos">
                     @csrf {{method_field('PUT')}}
                     <div class="modal-body">
                         <div class="box-body">
@@ -253,10 +251,8 @@
                             <!--ENTRADA PARA DESCRIPCION -->
                             <div class="form-group {{$errors->has('descripcion')? 'has-error':''}}">
                                 <label for="">Descripción</label>
-                                <div class="input-group">
-                                    <textarea class="textarea" id="editarDescripcion" name="descripcion" placeholder="" style="width: 100%; height: 150px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
+                                    <textarea class="form-control" id="editarDescripcion" name="descripcion" rows="5" placeholder="Información o descripción del producto"></textarea>
                                     {!! $errors->first('descripcion','<span class="help-block">*:message</span>')!!}
-                                </div>
                             </div>
 
                             <!--ENTRADA PARA STOCK -->
@@ -271,7 +267,7 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-6">
+                                {{--<div class="col-md-6">
                                     <!--ENTRADA PARA PRECIO COMPRA -->
                                     <div class="form-group {{$errors->has('precioCompra')? 'has-error':''}}">
                                         <label for="">Precio Compra</label>
@@ -301,7 +297,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <h4>
-                                                {{--<input type="checkbox" class="minimal porcentaje" checked>--}}
+                                                --}}{{--<input type="checkbox" class="minimal porcentaje" checked>--}}{{--
                                                 Porcentaje
                                             </h4>
                                         </div>
@@ -317,7 +313,7 @@
                                         </div>
                                     </div>
 
-                                </div>
+                                </div>--}}
                             </div>
                             <input type="hidden" name="imagen" value="" id="inputImagenEditar">
                             <input type="hidden" name="ventas" value="0">
@@ -416,8 +412,8 @@
                 {data: 'nombre'},
                 {data: 'tipo_categoria.categoria'},
                 {data: 'stock'},
-                {data: 'precio_compra'},
-                {data: 'precio_venta'},
+                /*{data: 'precio_compra'},
+                {data: 'precio_venta'},*/
                 {data: 'created_at'},
                 {
                     defaultContent: '\n' +
@@ -500,10 +496,10 @@
         //Editar producto
         $('.tablaproductos tbody').on('click', '.btnEditarProducto', function () {
             var data = table.row($(this).parents('tr')).data();
-
+            console.log(data);
             $('#editarCodigo').val(data.codigo);
             $('#editarNombre').val(data.nombre);
-            $('#editarDescripcion').value(data.descripcion);
+            $('#editarDescripcion').val(data.descripcion);
             $('#editarStock').val(data.stock);
             $('#editarPrecioCompra').val(data.precio_compra);
             $('#editarPrecioVenta').val(data.precio_venta);
@@ -511,7 +507,7 @@
             $('#editarCategoria').val(data.id_categoria);
 
             var formularioActualizarProducto = $('.myformActualizarproductos');
-            var url = '/producto-actualizado/' + data.id + '';
+            var url = '/producto-actualizado/'+data.id+''
 
             formularioActualizarProducto.attr('action', url);
         });
